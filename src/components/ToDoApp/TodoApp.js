@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Tasks from '../Tasks/Tasks'
+import { DragDropContext } from 'react-beautiful-dnd'
 import Input from '../Input/Input'
 import classes from './ToDoApp.scss'
 
@@ -14,26 +15,32 @@ const toDoApp = () => {
 	}
 
 	const submitHandler = () => {
-		if (task.trim()){
+		if (task.trim()) {
 			setToDoList(toDoList.concat(task))
 			setTask('')
-			inputRef.current.value=``
-			
-			
-			
+			inputRef.current.value = ``
+
+
+
 		}
 	}
 
 	const handleKeyDown = e => {
-		if(e.which===13) submitHandler()
+		if (e.which === 13) submitHandler()
 	}
 
 	const deleteHandler = id => {
-		
-		setToDoList(toDoList.filter((el,key)=>key!==id))
+
+		setToDoList(toDoList.filter((el, key) => key !== id))
 	}
-	
+
+	const dragEndHandler = result => {
+		//TODO
+	}
 	return (
+
+			<DragDropContext
+				onDragEnd={dragEndHandler}>
 		<div className={classes.Wrap}>
 			<Input
 				changeHandler={changeHandler}
@@ -42,15 +49,17 @@ const toDoApp = () => {
 				task={task}
 				submitHandler={submitHandler}
 				value={task}
-				inputRef={inputRef}
-				/>
-			<div className={classes.Tasks}>
-				<Tasks
-					toDo={toDoList}
-					deleteHandler={deleteHandler}
-					/>
-			</div>
-	  		</div>
+				inputRef={inputRef} />
+				<div className={classes.Tasks}>
+					<Tasks
+						tasksId="1"
+						toDo={toDoList}
+						deleteHandler={deleteHandler} />
+
+				</div>
+		</div>
+			</DragDropContext>
+
 	)
 }
 
