@@ -34,9 +34,26 @@ const toDoApp = () => {
 		setToDoList(toDoList.filter((el, key) => key !== id))
 	}
 
-	const dragEndHandler = result => {
-		//TODO
-	}
+	const reorder = (list, startIndex, endIndex) => {
+		const result = [...list];
+		const [removed] = result.splice(startIndex, 1);
+		result.splice(endIndex, 0, removed);
+	  
+		return result;
+	  }
+
+	const dragEndHandler = (result) => {
+		if (!result.destination) return
+	
+		const items = reorder(
+		  toDoList,
+		  result.source.index,
+		  result.destination.index
+		)
+	
+		setToDoList(items)
+	  }
+
 	return (
 
 			<DragDropContext
@@ -52,7 +69,6 @@ const toDoApp = () => {
 				inputRef={inputRef} />
 				<div className={classes.Tasks}>
 					<Tasks
-						tasksId="1"
 						toDo={toDoList}
 						deleteHandler={deleteHandler} />
 

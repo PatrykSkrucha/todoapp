@@ -1,25 +1,17 @@
 .Task{
-	// margin: 5px;
 	width: 90%;
-	position: relative;
 	border: 1px solid lightgrey;
-	list-style: none;
+	// list-style: none;
 	border-radius: 5px;
 	background-color: #fff;
-	// min-width: 100px;
 	display: flex;
 	justify-content: flex-end;
-	// flex-direction: row;
 	padding: 0.5em;
-	position: relative;
-	// text-align: center;
-	// background: rgb(243, 237, 237);
+	
 	
 	
 	.Text{
-		// flex-basis: 70%;
 		word-break: break-all;
-		// border: 1px solid blue;
 		margin-left: 1%;
 		display: flex;
 		align-items: center;
