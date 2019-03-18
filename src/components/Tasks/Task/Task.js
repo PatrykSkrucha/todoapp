@@ -20,15 +20,15 @@ const task = (props) => {
 
 
 	return (
-				<div 
-					className={styles.Task}>
-					<span className={styles.Text}>{props.task}</span>
-					<div className={styles.DeleteButton}>
-						<IconButton onClick={props.deleteHandler} className={classes.deleteIcon}>
-							<DeleteIcon />
-						</IconButton>
-					</div>
-				</div>
+		<div
+			className={styles.Task}>
+			<span className={styles.Text}>{props.task}</span>
+			<div className={styles.DeleteButton}>
+				<IconButton onClick={props.deleteHandler} className={classes.deleteIcon}>
+					<DeleteIcon />
+				</IconButton>
+			</div>
+		</div>
 
 	)
 }

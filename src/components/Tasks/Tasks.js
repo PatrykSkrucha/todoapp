@@ -10,7 +10,7 @@ const tasks = (props) => {
 	)
 
 	const list = props.toDo.map((el, key) => {
-		return (
+			return (
 			<Draggable key={`item-key-${key}`} draggableId={`item-id-${key}`} index={key}>
 				{(provided, snapshot) => (
 					<div
