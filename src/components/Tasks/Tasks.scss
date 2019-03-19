@@ -1,8 +1,7 @@
 .UlList{
-	width: 100%;
-	border: 1px solid aqua;
+	flex-basis: 100%;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	padding: 50px;
+	align-content: center;
+	margin: 0 auto;
 }

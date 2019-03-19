@@ -28,11 +28,11 @@ const tasks = (props) => {
 
 	return (
 		<>
-			<Droppable droppableId="droppable">
+			<Droppable droppableId="droppable" direction="vertical">
 				{(provided, snapshot) => (
 					<div
-						ref={provided.innerRef}
 						className={classes.UlList}
+						ref={provided.innerRef}
 						{...provided.droppableProps}>
 						{list}
 						{provided.placeholder}

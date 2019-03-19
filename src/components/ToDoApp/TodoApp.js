@@ -35,11 +35,11 @@ const toDoApp = () => {
 	}
 
 	const reorder = (list, startIndex, endIndex) => {
-		const result = [...list];
-		const [removed] = result.splice(startIndex, 1);
-		result.splice(endIndex, 0, removed);
+		const result = [...list]
+		const [removed] = result.splice(startIndex, 1)
+		result.splice(endIndex, 0, removed)
 	  
-		return result;
+		return result
 	  }
 
 	const dragEndHandler = (result) => {
@@ -52,13 +52,12 @@ const toDoApp = () => {
 		)
 	
 		setToDoList(items)
-	  }
-
+	}
+	
 	return (
-
+		<div className={classes.Wrap}>
 			<DragDropContext
 				onDragEnd={dragEndHandler}>
-		<div className={classes.Wrap}>
 			<Input
 				changeHandler={changeHandler}
 				refInput={inputRef}
@@ -73,8 +72,8 @@ const toDoApp = () => {
 						deleteHandler={deleteHandler} />
 
 				</div>
-		</div>
 			</DragDropContext>
+		</div>
 
 	)
 }

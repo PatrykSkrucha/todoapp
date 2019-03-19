@@ -4,7 +4,7 @@ import {Input, Button, withStyles} from '@material-ui/core';
 const styles = theme =>(
 
 	{
-		root: {
+		Button: {
 			background: 'linear-gradient(45deg, #00acc1 30%, #01579b 90%)',
 			borderRadius: 3,
 			border: 0,
@@ -13,7 +13,7 @@ const styles = theme =>(
 			textTransform: 'capitalize',
 			marginTop: 10,
 		},
-		input: {
+		Input: {
 			marginTop: 15,
 			width: '50vw',
 			[theme.breakpoints.down('sm')]: {
@@ -34,9 +34,7 @@ const input = (props) => {
 	return (
 		<>
 			<Input
-				classes={{
-					input: classes.input,
-				}}
+				className={classes.Input}
 				id="standard-name"
 				label="Utwórz notatkę"
 				type="text"
@@ -48,9 +46,7 @@ const input = (props) => {
 			
 
 			<Button
-				classes={{
-					root: classes.root, 
-				}}
+				className={classes.Button}
 				size="medium"
 				onClick={props.submitHandler}>
 				
