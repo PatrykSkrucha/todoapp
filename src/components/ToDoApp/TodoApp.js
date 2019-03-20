@@ -39,7 +39,6 @@ const toDoApp = (props) => {
 	}
 
 	const deleteHandler = id => {
-
 		setToDoList(toDoList.filter((el, key) => key !== id))
 	}
 
@@ -66,21 +65,24 @@ const toDoApp = (props) => {
 	}
 	
 	const handleClickOpen = id => {
-		console.log(id)
 		setEditableId(id)
 		setEdit(toDoList[id])		
-		console.log(edit)
-		// setOpen(true);
 	}
 
 	
 	const handleClose = task => {
-		console.log(task)
-		const newTasks = [...toDoList]
-		newTasks.splice(editableId, 1, task)
-		setToDoList(newTasks)
-		setEdit('')
-		setEditableId(null)
+		
+		if(task===edit && edit===null){
+			setEdit('')
+			setEditableId(null)
+		}
+		else{
+			const newTasks = [...toDoList]
+			newTasks.splice(editableId, 1, task)
+			setToDoList(newTasks)
+			setEdit('')
+			setEditableId(null)
+		}
 	  };
 	
 
