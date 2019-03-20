@@ -2,10 +2,7 @@ import React from 'react'
 import { Input, Button, withStyles } from '@material-ui/core'
 
 
-
 const styles = theme =>(
-
-
 
 	{
 		Button: {
@@ -24,27 +21,24 @@ const styles = theme =>(
 				width: '90vw',
 			  },
 		},
+		
 		nested: {
 			paddingLeft: theme.spacing.unit * 4,
 		},
+
 		root: {
 			width: '100%',
 			maxWidth: 360,
 			backgroundColor: theme.palette.background.paper,
-		  },
+		},
+		
 		  
 	}
-	) 
-	
-	
+) 
 
 const input = (props) => {
 
-
 	const { classes } = props;
-
-
-
 
 	return (
 		<>
@@ -56,10 +50,7 @@ const input = (props) => {
 				onChange={props.changeHandler}
 				inputRef={props.inputRef}
 				onKeyDown={props.handleKeyDown}
-				placeholder="Utwórz zadanie"
-			/>
-			
-
+				placeholder="Utwórz zadanie" />
 			<Button
 				className={classes.Button}
 				size="medium"
@@ -67,9 +58,7 @@ const input = (props) => {
 				
 				Dodaj zadanie
 			</Button>
-		
 		</>
-
 	)
 }
 

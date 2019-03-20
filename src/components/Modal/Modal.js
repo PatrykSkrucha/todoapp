@@ -16,9 +16,9 @@ const modal = (props) => {
 	const { classes, handleClose, open, task } = props;
 	const [edit, setEdit] = useState(0)
 	useEffect(()=>setEdit(task),[task])
+
 	const editHandler = e => {
 		setEdit(e.target.value)
-		console.log(edit)
 	}
 	const handleKeyDown = e => {
 		if(e.which===13) handleClose(edit)
@@ -41,18 +41,17 @@ const modal = (props) => {
 						<Input
 							value={edit}
 							className={classes.input}
-							inputProps={{
-								'aria-label': 'Description',
-							}}
+							
 							onChange={editHandler}
 							onKeyDown={handleKeyDown}
-							autoFocus
+							spellCheck={false}
+							
 						/>
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={()=>handleClose(edit)} color="primary">
-						Agree
+						Akceptuj
             </Button>
 				</DialogActions>
 			</Dialog>

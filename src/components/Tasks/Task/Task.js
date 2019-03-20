@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import PropTypes from 'prop-types'
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -25,7 +25,7 @@ const style = theme => (
 			
 		},
 		Text: {
-			marginLeft: '1%',
+			marginLeft: '5%',
 			display: 'flex',
 			alignItems: 'center',
 			flexBasis: '90%',
@@ -43,35 +43,44 @@ const style = theme => (
 
 
 const task = (props) => {
-	const DeleteButton = styled.div`
+	
+	const [show, setShow] = useState(false)
+
+	const IconSection = styled.div`
 		flex-basis: 5%;
+		padding: 2% 1%;
 		display: flex;
-		align-items: flex-start;	
+		align-items: flex-start;
+		opacity: ${props => props.visible ? "1" : "0"};	
 	`
 
-	const { classes } = props
+	const { classes, task, deleteHandler, editHandler } = props
 
 
 	return (
 				<Card 
-					className={classes.Card}>
-					<Typography className={classes.Text} variant="display1" gutterBottom>{props.task}</Typography>
-					<DeleteButton>
-						<IconButton onClick={props.deleteHandler} className={classes.IconButton}>
+					className={classes.Card}
+					onMouseEnter={()=>setShow(true)}
+					onMouseLeave={()=>setShow(false)}>
+					<Typography className={classes.Text} variant="display1" gutterBottom>{task}</Typography>
+					<IconSection visible={show} >
+						<IconButton onClick={deleteHandler} className={classes.IconButton}>
 							<DeleteIcon />
 						</IconButton>
 							
-						<IconButton onClick={props.editHandler} className={classes.IconButton}>
+						<IconButton onClick={editHandler} className={classes.IconButton}>
 							<EditIcon />
 						</IconButton>
 							
-					</DeleteButton>
+					</IconSection>
 				</Card>
 
 	)
 }
 
-
+task.propTypes = {
+	task: PropTypes.any
+}
 
 export default withStyles(style)(task);
 

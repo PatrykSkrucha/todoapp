@@ -14,7 +14,7 @@ const toDoApp = (props) => {
 	const inputRef = useRef()
 	const [task, setTask] = useState(``)
 	const [toDoList, setToDoList] = useState([])
-	const [edit, setEdit] = useState(``)
+	const [edit, setEdit] = useState('')
 	const [editableId, setEditableId] = useState(null)
 
 	const changeHandler = e => {
@@ -70,7 +70,7 @@ const toDoApp = (props) => {
 	
 	const handleClose = task => {
 		
-		if(task===edit && edit===null){
+		if(task===edit || task===''){
 			setEdit('')
 			setEditableId(null)
 		}
@@ -101,15 +101,13 @@ const toDoApp = (props) => {
 						toDo={toDoList}
 						deleteHandler={deleteHandler}
 						editHandler={handleClickOpen} />
-
 				</div>
 			</DragDropContext>
 			<Modal 
 				handleClose={handleClose}
 				task={edit}
-				open={edit.length}
+				open={edit!==''}
 				/>
-        
 		</div>
 
 	)
