@@ -4,8 +4,29 @@ import { DragDropContext } from 'react-beautiful-dnd'
 import Input from '../Input/Input'
 import Modal from '../Modal/Modal'
 import styles from './ToDoApp.scss'
+import {Snackbar, Button, Typography, withStyles, IconButton} from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close'
 
-
+const style = {
+	Text: {
+		color: 'white',
+		textAlign: 'center',
+	},
+	Button: {
+		color: '#ffb300',
+	},
+	IconButton: {
+		padding: 5,
+		color: 'white'
+	},
+	root: {
+		marginBottom: 20
+	},
+	message: {
+		width: '100%',
+	},
+	
+}
 
 
 const toDoApp = (props) => {
@@ -14,9 +35,12 @@ const toDoApp = (props) => {
 	const inputRef = useRef()
 	const [task, setTask] = useState(``)
 	const [toDoList, setToDoList] = useState([])
+	const [deletedList, setDeletedList] = useState(null)
 	const [edit, setEdit] = useState('')
 	const [editableId, setEditableId] = useState(null)
+	const [snackbar, setSnackbar] = useState(false)
 
+	const {classes} = props
 	const changeHandler = e => {
 		setTask(e.target.value)
 	}
@@ -32,12 +56,24 @@ const toDoApp = (props) => {
 		}
 	}
 
+	const revertList = () => {
+		setToDoList(deletedList)
+		setDeletedList(null)
+		setSnackbar(false)
+	}
+	
+
 	const handleKeyDown = e => {
 		if (e.which === 13) submitHandler()
 	}
 
 	const deleteHandler = id => {
+		setDeletedList(toDoList)
 		setToDoList(toDoList.filter((el, key) => key !== id))
+		setSnackbar(true)
+		setTimeout(() => {
+			setSnackbar(false)
+		}, 3000);
 	}
 
 	
@@ -107,10 +143,47 @@ const toDoApp = (props) => {
 				handleClose={handleClose}
 				task={edit}
 				open={edit!==''}
-				/>
+			/>
+			<Snackbar
+				ContentProps={{
+					classes: {
+						root: classes.root,
+						message: classes.message
+					},
+					'aria-describedby': 'message-id'
+				}}
+				anchorOriginBottomCenter
+				open = {snackbar}
+				onClose = {()=>setSnackbar(false)}
+				message={ 
+					<span className={styles.SnackbarMessage}>
+						<div className={styles.Left}>
+							<Typography
+								className={classes.Text}
+								id='message-id'
+								color='primary'
+								noWrap>
+								Notatka została usunięta
+					</Typography>
+						</div>
+						<div className={styles.Right}>
+							<Button
+								onClick={revertList}
+								className={classes.Button}>
+								Cofnij
+					</Button>
+							<IconButton
+								onClick={() => setSnackbar(false)}
+								className={classes.IconButton}>
+								<CloseIcon />
+							</IconButton>
+						</div>
+					</span>}
+
+			/>
 		</div>
 
 	)
 }
 
-export default toDoApp
+export default withStyles(style)(toDoApp)
