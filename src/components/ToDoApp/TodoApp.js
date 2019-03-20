@@ -2,13 +2,22 @@ import React, { useState, useRef } from 'react'
 import Tasks from '../Tasks/Tasks'
 import { DragDropContext } from 'react-beautiful-dnd'
 import Input from '../Input/Input'
-import classes from './ToDoApp.scss'
+import Modal from '../Modal/Modal'
+import styles from './ToDoApp.scss'
 
-const toDoApp = () => {
+
+
+
+const toDoApp = (props) => {
+	
 
 	const inputRef = useRef()
 	const [task, setTask] = useState(``)
 	const [toDoList, setToDoList] = useState([])
+	const [modal, setModal] = useState(false)
+	const [open, setOpen] = useState(false)
+	const [edit, setEdit] = useState(``)
+	const [editableId, setEditableId] = useState(null)
 
 	const changeHandler = e => {
 		setTask(e.target.value)
@@ -34,6 +43,8 @@ const toDoApp = () => {
 		setToDoList(toDoList.filter((el, key) => key !== id))
 	}
 
+	
+
 	const reorder = (list, startIndex, endIndex) => {
 		const result = [...list]
 		const [removed] = result.splice(startIndex, 1)
@@ -54,8 +65,27 @@ const toDoApp = () => {
 		setToDoList(items)
 	}
 	
+	const handleClickOpen = id => {
+		console.log(id)
+		setEditableId(id)
+		setEdit(toDoList[id])		
+		console.log(edit)
+		// setOpen(true);
+	}
+
+	
+	const handleClose = task => {
+		console.log(task)
+		const newTasks = [...toDoList]
+		newTasks.splice(editableId, 1, task)
+		setToDoList(newTasks)
+		setEdit('')
+		setEditableId(null)
+	  };
+	
+
 	return (
-		<div className={classes.Wrap}>
+		<div className={styles.Wrap}>
 			<DragDropContext
 				onDragEnd={dragEndHandler}>
 			<Input
@@ -66,16 +96,23 @@ const toDoApp = () => {
 				submitHandler={submitHandler}
 				value={task}
 				inputRef={inputRef} />
-				<div className={classes.Tasks}>
+				<div className={styles.Tasks}>
 					<Tasks
 						toDo={toDoList}
-						deleteHandler={deleteHandler} />
+						deleteHandler={deleteHandler}
+						editHandler={handleClickOpen} />
 
 				</div>
 			</DragDropContext>
+			<Modal 
+				handleClose={handleClose}
+				task={edit}
+				open={edit.length}
+				/>
+        
 		</div>
 
 	)
 }
 
-export default toDoApp;
+export default toDoApp

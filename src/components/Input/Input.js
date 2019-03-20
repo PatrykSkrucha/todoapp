@@ -1,7 +1,11 @@
 import React from 'react'
-import {Input, Button, withStyles} from '@material-ui/core';
+import { Input, Button, withStyles } from '@material-ui/core'
+
+
 
 const styles = theme =>(
+
+
 
 	{
 		Button: {
@@ -19,15 +23,26 @@ const styles = theme =>(
 			[theme.breakpoints.down('sm')]: {
 				width: '90vw',
 			  },
-		}
+		},
+		nested: {
+			paddingLeft: theme.spacing.unit * 4,
+		},
+		root: {
+			width: '100%',
+			maxWidth: 360,
+			backgroundColor: theme.palette.background.paper,
+		  },
+		  
 	}
 	) 
+	
 	
 
 const input = (props) => {
 
 
 	const { classes } = props;
+
 
 
 
@@ -51,7 +66,8 @@ const input = (props) => {
 				onClick={props.submitHandler}>
 				
 				Dodaj zadanie
-    		</Button>
+			</Button>
+		
 		</>
 
 	)

@@ -1,7 +1,8 @@
 import React from 'react'
-import styles from './Task.scss'
+import styled from 'styled-components';
 import PropTypes from 'prop-types'
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit'
 import { IconButton, withStyles, Card, Typography } from '@material-ui/core/';
 import blue from '@material-ui/core/colors/blue';
 
@@ -42,6 +43,11 @@ const style = theme => (
 
 
 const task = (props) => {
+	const DeleteButton = styled.div`
+		flex-basis: 5%;
+		display: flex;
+		align-items: flex-start;	
+	`
 
 	const { classes } = props
 
@@ -50,11 +56,16 @@ const task = (props) => {
 				<Card 
 					className={classes.Card}>
 					<Typography className={classes.Text} variant="display1" gutterBottom>{props.task}</Typography>
-					<div className={styles.DeleteButton}>
+					<DeleteButton>
 						<IconButton onClick={props.deleteHandler} className={classes.IconButton}>
 							<DeleteIcon />
 						</IconButton>
-					</div>
+							
+						<IconButton onClick={props.editHandler} className={classes.IconButton}>
+							<EditIcon />
+						</IconButton>
+							
+					</DeleteButton>
 				</Card>
 
 	)
