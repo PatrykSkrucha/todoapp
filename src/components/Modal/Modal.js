@@ -20,6 +20,9 @@ const modal = (props) => {
 		setEdit(e.target.value)
 		console.log(edit)
 	}
+	const handleKeyDown = e => {
+		if(e.which===13) handleClose(edit)
+	}
 	return (
 		
 			<Dialog
@@ -42,6 +45,7 @@ const modal = (props) => {
 								'aria-label': 'Description',
 							}}
 							onChange={editHandler}
+							onKeyDown={handleKeyDown}
 							autoFocus
 						/>
 					</DialogContentText>

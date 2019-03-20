@@ -14,8 +14,6 @@ const toDoApp = (props) => {
 	const inputRef = useRef()
 	const [task, setTask] = useState(``)
 	const [toDoList, setToDoList] = useState([])
-	const [modal, setModal] = useState(false)
-	const [open, setOpen] = useState(false)
 	const [edit, setEdit] = useState(``)
 	const [editableId, setEditableId] = useState(null)
 

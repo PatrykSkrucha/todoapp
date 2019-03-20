@@ -53,7 +53,6 @@ const task = (props) => {
 
 
 	return (
-<<<<<<< HEAD
 				<Card 
 					className={classes.Card}>
 					<Typography className={classes.Text} variant="display1" gutterBottom>{props.task}</Typography>
@@ -68,17 +67,6 @@ const task = (props) => {
 							
 					</DeleteButton>
 				</Card>
-=======
-		<div
-			className={styles.Task}>
-			<span className={styles.Text}>{props.task}</span>
-			<div className={styles.DeleteButton}>
-				<IconButton onClick={props.deleteHandler} className={classes.deleteIcon}>
-					<DeleteIcon />
-				</IconButton>
-			</div>
-		</div>
->>>>>>> b7b32a49e1aa7762ca1a2d816222a87e56f91dc8
 
 	)
 }
