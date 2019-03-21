@@ -1,29 +1,12 @@
 import React, { useState, useRef } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
-import { Snackbar, Button, Typography, withStyles, IconButton } from '@material-ui/core'
+import { withStyles } from '@material-ui/core'
 import Tasks from '../Tasks/Tasks'
 import Input from '../Input/Input'
 import Modal from '../Modal/Modal'
-import CloseIcon from '@material-ui/icons/Close'
+import Snackbar from '../Snackbar/Snackbar'
 
 const style = {
-	Text: {
-		color: 'white',
-		textAlign: 'center',
-	},
-	Button: {
-		color: '#ffb300',
-	},
-	IconButton: {
-		padding: 5,
-		color: 'white'
-	},
-	root: {
-		marginBottom: 20
-	},
-	message: {
-		width: '100%',
-	},
 	Wrap: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -38,24 +21,7 @@ const style = {
 		flexDirection: 'row',
 		minHeight: 200,
 	},
-	SnackbarMessage: {
-		display: 'flex',
-		justifyContent: 'space-between',
-	
-	},
-	Left: {
-		flexBasis: '30%',
-		display: 'flex',
-		alignItems: 'center',
-	},
-	Right: {
-		display: 'flex',
-		justifyContent: 'flex-end',
-		alignItems: 'center',
-	}
-	
 }
-
 
 const toDoApp = (props) => {
 	
@@ -145,7 +111,11 @@ const toDoApp = (props) => {
 			setEdit('')
 			setEditableId(null)
 		}
-	  };
+	  }
+
+	  const closeSnackbarHandler = () => {
+		setSnackbar(false)
+	  }
 	
 
 	return (
@@ -172,43 +142,10 @@ const toDoApp = (props) => {
 				task={edit}
 				open={edit!==''}
 			/>
-			<Snackbar
-				ContentProps={{
-					classes: {
-						root: classes.root,
-						message: classes.message
-					},
-					'aria-describedby': 'message-id'
-				}}
-				anchorOriginBottomCenter
-				open = {snackbar}
-				onClose = {()=>setSnackbar(false)}
-				message={ 
-					<span className={classes.SnackbarMessage}>
-						<div className={classes.Left}>
-							<Typography
-								className={classes.Text}
-								id='message-id'
-								color='primary'
-								noWrap>
-								Notatka została usunięta
-							</Typography>
-						</div>
-						<div className={classes.Right}>
-							<Button
-								onClick={revertList}
-								className={classes.Button}>
-								Cofnij
-					</Button>
-							<IconButton
-								onClick={() => setSnackbar(false)}
-								className={classes.IconButton}>
-								<CloseIcon />
-							</IconButton>
-						</div>
-					</span>}
-
-			/>
+			<Snackbar 
+				snackbar={snackbar}
+				closeSnackbarHandler={closeSnackbarHandler}
+				revertList={revertList}/>
 		</div>
 
 	)
