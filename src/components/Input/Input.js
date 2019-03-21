@@ -1,12 +1,13 @@
 import React from 'react'
 import { Input, Button, withStyles } from '@material-ui/core'
+import blue from '@material-ui/core/colors/blue'
 
 
 const styles = theme =>(
 
 	{
 		Button: {
-			background: 'linear-gradient(45deg, #00acc1 30%, #01579b 90%)',
+			background: `linear-gradient(45deg, ${blue[600]} 30%, ${blue[800]} 90%)`,
 			borderRadius: 3,
 			border: 0,
 			color: 'white',
@@ -18,7 +19,7 @@ const styles = theme =>(
 			marginTop: 15,
 			width: '50vw',
 			[theme.breakpoints.down('sm')]: {
-				width: '90vw',
+				width: '80vw',
 			  },
 		},
 		

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Snackbar, Button, Typography, withStyles, IconButton } from '@material-ui/core'
+import React, {useState} from 'react'
+import { Snackbar, Tooltip, SnackbarContent, Button, Typography, withStyles, IconButton, Zoom  } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 
 const style = {
@@ -9,55 +9,84 @@ const style = {
 	},
 	Button: {
 		color: '#ffb300',
+		padding: '2%',
+		fontSize: '.96em',
+		'&:hover': {
+			background: '#424242'
+		},
+		
 	},
 	IconButton: {
 		padding: 5,
-		color: 'white'
+		color: '#fafafa',
+		'&:hover': {
+			color: '#e0e0e0',
+			backgroundColor: 'inherit',
+		}
 	},
-	root: {
-		marginBottom: 20
-	},
-	message: {
-		width: '100%',
+	Snackbar: {
+		marginBottom: 30,
+		padding: '3% 4%',
 	},
 	SnackbarMessage: {
 		display: 'flex',
-		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
 	
+	Action: {
+		width: '100%',
 	},
-	Left: {
-		flexBasis: '30%',
-		display: 'flex',
-		alignItems: 'center',
+	CloseIcon: {
+		fontSize: '0.85em',
 	},
-	Right: {
-		display: 'flex',
-		justifyContent: 'flex-end',
-		alignItems: 'center',
+	Tooltip: {
+		backgroundColor: '#eeeeee',
+		color: 'rgba(0, 0, 0, 0.87)',
 	}
 	
+
 }
 
 const snackbar = (props) => {
 
+	const [show, setShow] = useState(false)
+
 	const { classes, snackbar, closeSnackbarHandler, revertList } = props
 
+	const action = (
+		<div className={classes.Action}>
+		<Button
+			onClick={revertList}
+			className={classes.Button}>
+			Cofnij
+		</Button>
+
+		<Tooltip 
+			TransitionComponent={Zoom}
+			title="Zamknij"
+			placement="bottom"
+			open={show}>
+			<IconButton
+				onMouseOver={()=>setShow(true)}
+				onMouseLeave={()=>setShow(false)}
+				onClick={closeSnackbarHandler}
+				className={classes.IconButton}>
+					<CloseIcon onClick={()=>setShow(false)} className={classes.CloseIcon}/>
+			</IconButton>
+		</Tooltip>
+		</div>
+	)
+	
 	return (
 		<>
 			<Snackbar
-				ContentProps={{
-					classes: {
-						root: classes.root,
-						message: classes.message
-					},
-					'aria-describedby': 'message-id'
-				}}
 				anchorOriginBottomCenter
 				open={snackbar}
-				onClose={closeSnackbarHandler}
-				message={
-					<span className={classes.SnackbarMessage}>
-						<div className={classes.Left}>
+				onClose={closeSnackbarHandler}>
+				<SnackbarContent
+					className={classes.Snackbar}
+					message={
+						<span id="message-id" className={classes.SnackbarMessage}>
 							<Typography
 								className={classes.Text}
 								id='message-id'
@@ -65,22 +94,11 @@ const snackbar = (props) => {
 								noWrap>
 								Notatka została usunięta
 							</Typography>
-						</div>
-						<div className={classes.Right}>
-							<Button
-								onClick={revertList}
-								className={classes.Button}>
-								Cofnij
-					</Button>
-							<IconButton
-								onClick={closeSnackbarHandler}
-								className={classes.IconButton}>
-								<CloseIcon />
-							</IconButton>
-						</div>
-					</span>}
+						</span>}
+					action={action}
+						/>
 
-			/>
+			</Snackbar>
 		</>
 	)
 }

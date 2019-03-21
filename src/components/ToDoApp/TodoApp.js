@@ -67,7 +67,7 @@ const toDoApp = (props) => {
 		setSnackbar(true)
 		setTimeout(() => {
 			setSnackbar(false)
-		}, 3000);
+		}, 9000);
 	}
 
 	

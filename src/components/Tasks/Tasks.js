@@ -17,6 +17,7 @@ const tasks = (props) => {
 				{(provided, snapshot) => (
 					<div
 						ref={provided.innerRef}
+						isDragging={snapshot.isDragging}
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}>
 						<Task
