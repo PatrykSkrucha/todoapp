@@ -41,7 +41,7 @@ const task = (props) => {
 	const StyledCard = styled(Card)`
 		width: 80vw;
 		min-height: 50px;
-		background-color: ${props=>props.isDraggable? '#f5f5f5' : '#757575'};
+		background-color: ${props=>props.isDragging? '#bdbdbd' : '#f5f5f5'};
 		display: flex;
 		justify-content: flex-end;
 		padding: .5em;
@@ -52,11 +52,11 @@ const task = (props) => {
 	`;
 	
 	
-	const { classes, task, deleteHandler, editHandler } = props
+	const { classes, task, deleteHandler, editHandler, isDragging } = props
 
 
 	return (
-				<StyledCard>
+				<StyledCard isDragging={isDragging}>
 					<Typography className={classes.Text} variant="display1" gutterBottom>{task}</Typography>
 					<div className={classes.IconSection}>
 						<IconButton onClick={deleteHandler} className={classes.IconButton}>

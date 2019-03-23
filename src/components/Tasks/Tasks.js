@@ -2,6 +2,7 @@ import React from 'react'
 import Task from './Task/Task'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import styled from 'styled-components';
+
 const tasks = (props) => {
 
 	const UlList = styled.div`
@@ -17,10 +18,11 @@ const tasks = (props) => {
 				{(provided, snapshot) => (
 					<div
 						ref={provided.innerRef}
-						isDragging={snapshot.isDragging}
 						{...provided.draggableProps}
-						{...provided.dragHandleProps}>
+						{...provided.dragHandleProps}
+						>
 						<Task
+							isDragging={snapshot.isDragging}
 							task={el}
 							deleteHandler={() => props.deleteHandler(key)}
 							editHandler={() => props.editHandler(key)} />

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { withStyles } from '@material-ui/core'
 import Tasks from '../Tasks/Tasks'
@@ -65,9 +65,9 @@ const toDoApp = (props) => {
 		setDeletedList(toDoList)
 		setToDoList(toDoList.filter((el, key) => key !== id))
 		setSnackbar(true)
-		setTimeout(() => {
+		const closeSnackbar = setTimeout(() => {
 			setSnackbar(false)
-		}, 9000);
+		}, 10000);
 	}
 
 	
