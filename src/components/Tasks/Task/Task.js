@@ -18,7 +18,11 @@ const style = theme => (
 			alignItems: 'center',
 			flexBasis: '90%',
 			wordBreak: 'break-all',
-			padding: '.3em .1em'
+			padding: '.3em .1em',
+			fontSize: 30,
+			[theme.breakpoints.down('sm')]: {
+				fontSize: 20,
+			  },
 
 		},
 		Number: {
@@ -41,7 +45,7 @@ const task = (props) => {
 	const StyledCard = styled(Card)`
 		width: 80vw;
 		min-height: 50px;
-		background-color: ${props=>props.isDragging? '#bdbdbd' : '#f5f5f5'};
+		background-color: #f5f5f5;
 		display: flex;
 		justify-content: flex-end;
 		padding: .5em;
@@ -57,7 +61,7 @@ const task = (props) => {
 
 	return (
 				<StyledCard isDragging={isDragging}>
-					<Typography className={classes.Text} variant="display1" gutterBottom>{task}</Typography>
+					<Typography className={classes.Text} variant="display1" gutterBottom inline style={{wordBreak: 'break-all'}}>{task}</Typography>
 					<div className={classes.IconSection}>
 						<IconButton onClick={deleteHandler} className={classes.IconButton}>
 							<DeleteIcon />

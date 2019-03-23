@@ -119,9 +119,10 @@ const toDoApp = (props) => {
 	
 
 	return (
-		<div className={classes.Wrap}>
+		<>
 			<DragDropContext
 				onDragEnd={dragEndHandler}>
+		<div className={classes.Wrap}>
 			<Input
 				changeHandler={changeHandler}
 				refInput={inputRef}
@@ -136,6 +137,7 @@ const toDoApp = (props) => {
 						deleteHandler={deleteHandler}
 						editHandler={handleClickOpen} />
 				</div>
+		</div>
 			</DragDropContext>
 			<Modal 
 				handleClose={handleClose}
@@ -146,8 +148,7 @@ const toDoApp = (props) => {
 				snackbar={snackbar}
 				closeSnackbarHandler={closeSnackbarHandler}
 				revertList={revertList}/>
-		</div>
-
+		</>
 	)
 }
 

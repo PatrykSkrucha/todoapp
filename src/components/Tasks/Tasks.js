@@ -22,7 +22,6 @@ const tasks = (props) => {
 						{...provided.dragHandleProps}
 						>
 						<Task
-							isDragging={snapshot.isDragging}
 							task={el}
 							deleteHandler={() => props.deleteHandler(key)}
 							editHandler={() => props.editHandler(key)} />
