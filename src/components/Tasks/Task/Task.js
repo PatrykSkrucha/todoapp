@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import styled from 'styled-components'
+import { Draggable } from 'react-beautiful-dnd'
 import { IconButton, withStyles, Card, Typography } from '@material-ui/core/'
 
 const style = theme => (
@@ -56,11 +57,18 @@ const task = (props) => {
 	`;
 	
 	
-	const { classes, task, deleteHandler, editHandler, isDragging } = props
+	const { classes, id, task, deleteHandler, editHandler } = props
 
 
 	return (
-				<StyledCard isDragging={isDragging}>
+		<Draggable key={`item-key-${id}`} draggableId={`item-id-${id}`} index={id} shouldRespectForceTouch={false}>
+				{(provided, snapshot) => (
+					<div
+						ref={provided.innerRef}
+						{...provided.draggableProps}
+						{...provided.dragHandleProps}
+						>
+				<StyledCard>
 					<Typography className={classes.Text} variant="display1" gutterBottom inline style={{wordBreak: 'break-all'}}>{task}</Typography>
 					<div className={classes.IconSection}>
 						<IconButton onClick={deleteHandler} className={classes.IconButton}>
@@ -73,7 +81,9 @@ const task = (props) => {
 							
 					</div>
 				</StyledCard>
-
+				</div>
+				)}
+		</Draggable>
 	)
 }
 

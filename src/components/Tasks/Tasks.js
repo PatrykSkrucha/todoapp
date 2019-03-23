@@ -1,6 +1,6 @@
 import React from 'react'
 import Task from './Task/Task'
-import { Droppable, Draggable } from 'react-beautiful-dnd'
+import { Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components';
 
 const tasks = (props) => {
@@ -11,23 +11,18 @@ const tasks = (props) => {
 		align-content: center;
 		margin: 0 auto;	
 	`
-
+	
 	const list = props.toDo.map((el, key) => {
 			return (
-			<Draggable key={`item-key-${key}`} draggableId={`item-id-${key}`} index={key}>
-				{(provided, snapshot) => (
-					<div
-						ref={provided.innerRef}
-						{...provided.draggableProps}
-						{...provided.dragHandleProps}
-						>
+			
 						<Task
+							key={key}
+							id={key}
 							task={el}
 							deleteHandler={() => props.deleteHandler(key)}
 							editHandler={() => props.editHandler(key)} />
-					</div>
-				)}
-			</Draggable>
+					
+				
 		)
 	})
 
