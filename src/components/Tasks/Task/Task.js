@@ -2,11 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
-import styled from 'styled-components'
 import { Draggable } from 'react-beautiful-dnd'
-import { IconButton, withStyles, Card, Typography } from '@material-ui/core/'
+import { IconButton, withStyles, Card, Typography  } from '@material-ui/core/'
 
-const style = theme => (
+
+
+const style = (theme, props) => (
 	{
 		IconButton: {
 			color: '#ff3d00',
@@ -36,6 +37,17 @@ const style = theme => (
 			padding: '2% 1%',
 			display: 'flex',
 			alignItems: 'flex-start'
+		},
+		Card: {
+			width: '50vw',
+			minHeight: 50,
+			backgroundColor: props=>props.bg,
+			display: 'flex',
+			justifyContent: 'flex-end',
+			padding: '.5em',
+			[theme.breakpoints.down('sm')]: {
+				width: '80vw',
+			  },
 		}
 	}
 )
@@ -43,33 +55,22 @@ const style = theme => (
 
 const task = (props) => {
 	
-	const StyledCard = styled(Card)`
-		width: 80vw;
-		min-height: 50px;
-		background-color: #f5f5f5;
-		display: flex;
-		justify-content: flex-end;
-		padding: .5em;
-		margin: .5em auto;
-		@media(min-width: 960px){
-			width: 50vw;
-		}
-	`;
-	
-	
 	const { classes, id, task, deleteHandler, editHandler } = props
-
 
 	return (
 		<Draggable key={`item-key-${id}`} draggableId={`item-id-${id}`} index={id} shouldRespectForceTouch={false}>
-				{(provided, snapshot) => (
+				{(provided, snapshot) => {
+					const isDragging = snapshot.isDragging
+				return	(
 					<div
-						ref={provided.innerRef}
+						ref={provided.innerRef} 
 						{...provided.draggableProps}
-						{...provided.dragHandleProps}
-						>
-				<StyledCard>
+						{...provided.dragHandleProps}>
+				<Card 
+					bg="black"
+					className={classes.Card}>
 					<Typography className={classes.Text} variant="display1" gutterBottom inline style={{wordBreak: 'break-all'}}>{task}</Typography>
+					
 					<div className={classes.IconSection}>
 						<IconButton onClick={deleteHandler} className={classes.IconButton}>
 							<DeleteIcon />
@@ -78,12 +79,14 @@ const task = (props) => {
 						<IconButton onClick={editHandler} className={classes.IconButton}>
 							<EditIcon />
 						</IconButton>
-							
 					</div>
-				</StyledCard>
+				</Card>
 				</div>
-				)}
+				)
+				}}
 		</Draggable>
+
+		
 	)
 }
 

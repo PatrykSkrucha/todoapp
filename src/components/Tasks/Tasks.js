@@ -2,10 +2,11 @@ import React from 'react'
 import Task from './Task/Task'
 import { Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components';
+import { List, RootRef  } from '@material-ui/core/'
 
 const tasks = (props) => {
 
-	const UlList = styled.div`
+	const UlList = styled(List)`
 		display: flex;
 		flex-direction: column;
 		align-content: center;
@@ -27,18 +28,21 @@ const tasks = (props) => {
 	})
 
 	return (
-		<>
-			<Droppable droppableId="droppable" direction="vertical">
+		
+			<Droppable droppableId="droppable">
 				{(provided, snapshot) => (
-					<UlList
-						ref={provided.innerRef}
-						{...provided.droppableProps}>
+					<RootRef rootRef={provided.innerRef}>
+
+						<UlList
+						{...provided.droppableProps}
+					>
 						{list}
 						{provided.placeholder}
 					</UlList>
+					</RootRef>
 				)}
 			</Droppable>
-		</>
+		
 	)
 
 }
