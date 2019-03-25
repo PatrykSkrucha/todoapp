@@ -41,8 +41,8 @@ const style = (theme, props) => (
 		Card: {
 			width: '50vw',
 			minHeight: 50,
-			backgroundColor: props=>props.bg,
 			display: 'flex',
+			margin: '.5em 0',
 			justifyContent: 'flex-end',
 			padding: '.5em',
 			[theme.breakpoints.down('sm')]: {
@@ -60,15 +60,14 @@ const task = (props) => {
 	return (
 		<Draggable key={`item-key-${id}`} draggableId={`item-id-${id}`} index={id} shouldRespectForceTouch={false}>
 				{(provided, snapshot) => {
-					const isDragging = snapshot.isDragging
 				return	(
 					<div
 						ref={provided.innerRef} 
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}>
 				<Card 
-					bg="black"
-					className={classes.Card}>
+					className={classes.Card}
+					style={{background: snapshot.isDragging ? '#e0e0e0' : '#f5f5f5'}}>
 					<Typography className={classes.Text} variant="display1" gutterBottom inline style={{wordBreak: 'break-all'}}>{task}</Typography>
 					
 					<div className={classes.IconSection}>

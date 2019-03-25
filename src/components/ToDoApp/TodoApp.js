@@ -24,8 +24,8 @@ const style = {
 }
 
 const toDoApp = (props) => {
-	
 
+	let time = null
 	const inputRef = useRef()
 	const [task, setTask] = useState(``)
 	const [toDoList, setToDoList] = useState([])
@@ -33,121 +33,139 @@ const toDoApp = (props) => {
 	const [edit, setEdit] = useState('')
 	const [editableId, setEditableId] = useState(null)
 	const [snackbar, setSnackbar] = useState(false)
-
-	const {classes} = props
+	const [tooltip, setTooltip] = useState(false)
+	const [timer, setTimer] = useState(false)
+	const { classes } = props
+	
+	useEffect(()=>{
+			if(timer){			
+				time = setTimeout(() => {
+					setSnackbar(false)
+					setTimer(false)
+				}, 4000)
+				
+			}
+			else{				
+				clearTimeout(time)
+			}
+		},[timer])
+	
 	const changeHandler = e => {
 		setTask(e.target.value)
 	}
+	
+	
 
 	const submitHandler = () => {
 		if (task.trim()) {
 			setToDoList(toDoList.concat(task))
 			setTask('')
 			inputRef.current.value = ``
-
-
-
 		}
+	}
+	
+	const handleKeyDown = e => {
+		if (e.which === 13) submitHandler()
 	}
 
 	const revertList = () => {
 		setToDoList(deletedList)
 		setDeletedList(null)
 		setSnackbar(false)
-	}
-	
-
-	const handleKeyDown = e => {
-		if (e.which === 13) submitHandler()
+		setTimer(false)
 	}
 
 	const deleteHandler = id => {
 		setDeletedList(toDoList)
 		setToDoList(toDoList.filter((el, key) => key !== id))
 		setSnackbar(true)
-		const closeSnackbar = setTimeout(() => {
-			setSnackbar(false)
-		}, 10000);
+		setTimer(true)
 	}
-
-	
 
 	const reorder = (list, startIndex, endIndex) => {
 		const result = [...list]
 		const [removed] = result.splice(startIndex, 1)
 		result.splice(endIndex, 0, removed)
-	  
+
 		return result
-	  }
+	}
 
 	const dragEndHandler = (result) => {
 		if (!result.destination) return
-	
+
 		const items = reorder(
-		  toDoList,
-		  result.source.index,
-		  result.destination.index
+			toDoList,
+			result.source.index,
+			result.destination.index
 		)
-	
 		setToDoList(items)
 	}
-	
+
 	const handleClickOpen = id => {
 		setEditableId(id)
-		setEdit(toDoList[id])		
+		setEdit(toDoList[id])
 	}
 
-	
 	const handleClose = task => {
-		
-		if(task===edit || task===''){
+		if (task === edit || task === '') {
 			setEdit('')
 			setEditableId(null)
 		}
-		else{
+		else {
 			const newTasks = [...toDoList]
 			newTasks.splice(editableId, 1, task)
 			setToDoList(newTasks)
 			setEdit('')
 			setEditableId(null)
 		}
-	  }
+	}
 
-	  const closeSnackbarHandler = () => {
+	const closeSnackbarHandler = () => {
 		setSnackbar(false)
-	  }
-	
+		setTimer(false)
+	}
 
+	const tooltipOpenHandler = () => {
+		setTooltip(true)
+	}
+	const tooltipCloseHandler = () => {
+		setTooltip(false)
+	}
+	
 	return (
 		<>
 			<DragDropContext
 				onDragEnd={dragEndHandler}>
-		<div className={classes.Wrap}>
-			<Input
-				changeHandler={changeHandler}
-				refInput={inputRef}
-				handleKeyDown={handleKeyDown}
-				task={task}
-				submitHandler={submitHandler}
-				value={task}
-				inputRef={inputRef} />
-				<div className={classes.Tasks}>
-					<Tasks
-						toDo={toDoList}
-						deleteHandler={deleteHandler}
-						editHandler={handleClickOpen} />
+				<div className={classes.Wrap}>
+					<Input
+						changeHandler={changeHandler}
+						refInput={inputRef}
+						handleKeyDown={handleKeyDown}
+						task={task}
+						submitHandler={submitHandler}
+						value={task}
+						inputRef={inputRef} />
+					<div className={classes.Tasks}>
+						<Tasks
+							toDo={toDoList}
+							deleteHandler={deleteHandler}
+							editHandler={handleClickOpen} />
+					</div>
 				</div>
-		</div>
 			</DragDropContext>
-			<Modal 
+			<Modal
 				handleClose={handleClose}
 				task={edit}
-				open={edit!==''}
+				open={edit !== ''}
 			/>
-			<Snackbar 
+			<Snackbar
 				snackbar={snackbar}
 				closeSnackbarHandler={closeSnackbarHandler}
-				revertList={revertList}/>
+				revertList={revertList}
+				tooltip={tooltip}
+				tooltipOpenHandler={tooltipOpenHandler}
+				tooltipCloseHandler={tooltipCloseHandler}
+			/>
 		</>
 	)
 }

@@ -13,18 +13,15 @@ const tasks = (props) => {
 		margin: 0 auto;	
 	`
 	
+	const { deleteHandler, editHandler} = props
+	
 	const list = props.toDo.map((el, key) => {
-			return (
-			
-						<Task
-							key={key}
-							id={key}
-							task={el}
-							deleteHandler={() => props.deleteHandler(key)}
-							editHandler={() => props.editHandler(key)} />
-					
-				
-		)
+		return 	<Task
+					key={key}
+					id={key}
+					task={el}
+					deleteHandler={() => deleteHandler(key)}
+					editHandler={() => editHandler(key)} />
 	})
 
 	return (

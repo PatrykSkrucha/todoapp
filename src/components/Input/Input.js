@@ -22,7 +22,7 @@ const styles = theme =>(
 			width: '50vw',
 			[theme.breakpoints.down('sm')]: {
 				width: '80vw',
-			  },
+			},
 		},
 		
 		
