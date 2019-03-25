@@ -46,10 +46,7 @@ const style = theme => (
 		CloseIcon: {
 			fontSize: '0.85em',
 		},
-		Tooltip: {
-			backgroundColor: '#eeeeee',
-			color: 'rgba(0, 0, 0, 0.87)',
-		}
+		
 	}
 ) 
 
@@ -84,7 +81,6 @@ const snackbar = (props) => {
 								Cofnij
 							</Button>
 							<Tooltip
-								className={classes.Tooltip}
 								TransitionComponent={Zoom}
 								title="Zamknij"
 								placement="bottom"
