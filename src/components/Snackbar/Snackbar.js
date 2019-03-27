@@ -26,9 +26,10 @@ const style = theme => (
 			}
 		},
 		Snackbar: {
+			width: 'auto',
 			[theme.breakpoints.down('sm')]: {
 				width: '80vw',
-				margin: '0 auto',
+				margin: 'auto',
 			},
 		},
 		SnackbarContent: {
@@ -53,12 +54,15 @@ const style = theme => (
 const snackbar = (props) => {
 
 	const { classes, tooltipOpenHandler, tooltipCloseHandler, tooltip, snackbar, closeSnackbarHandler, revertList } = props
+
 	
+
 	return (
 		<>
 			<Snackbar
 				className={classes.Snackbar}
-				anchorOriginBottomCenter
+				anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+				autoHideDuration="3000"
 				open={snackbar}
 				onClose={closeSnackbarHandler}>
 				<SnackbarContent

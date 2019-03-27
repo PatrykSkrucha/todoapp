@@ -5,6 +5,8 @@ import Tasks from '../Tasks/Tasks'
 import Input from '../Input/Input'
 import Modal from '../Modal/Modal'
 import Snackbar from '../Snackbar/Snackbar'
+import useTimeout from "@rooks/use-timeout"
+
 
 const style = {
 	Wrap: {
@@ -25,7 +27,7 @@ const style = {
 
 const toDoApp = (props) => {
 
-	let time = null
+	
 	const inputRef = useRef()
 	const [task, setTask] = useState(``)
 	const [toDoList, setToDoList] = useState([])
@@ -34,32 +36,21 @@ const toDoApp = (props) => {
 	const [editableId, setEditableId] = useState(null)
 	const [snackbar, setSnackbar] = useState(false)
 	const [tooltip, setTooltip] = useState(false)
-	const [timer, setTimer] = useState(false)
+
 	const { classes } = props
 	
-	useEffect(()=>{
-			if(timer){			
-				time = setTimeout(() => {
-					setSnackbar(false)
-					setTimer(false)
-				}, 4000)
-				
-			}
-			else{				
-				clearTimeout(time)
-			}
-		},[timer])
 	
-	const changeHandler = e => {
-		setTask(e.target.value)
-	}
+		
+		const changeHandler = e => {
+			setTask(e.target.value)
+		}
+		
 	
-	
-
-	const submitHandler = () => {
-		if (task.trim()) {
-			setToDoList(toDoList.concat(task))
-			setTask('')
+		
+		const submitHandler = () => {
+			if (task.trim()) {
+				setToDoList(toDoList.concat(task))
+				setTask('')
 			inputRef.current.value = ``
 		}
 	}
@@ -72,14 +63,14 @@ const toDoApp = (props) => {
 		setToDoList(deletedList)
 		setDeletedList(null)
 		setSnackbar(false)
-		setTimer(false)
+		
 	}
 
 	const deleteHandler = id => {
 		setDeletedList(toDoList)
 		setToDoList(toDoList.filter((el, key) => key !== id))
 		setSnackbar(true)
-		setTimer(true)
+		
 	}
 
 	const reorder = (list, startIndex, endIndex) => {
@@ -122,7 +113,7 @@ const toDoApp = (props) => {
 
 	const closeSnackbarHandler = () => {
 		setSnackbar(false)
-		setTimer(false)
+		
 	}
 
 	const tooltipOpenHandler = () => {
@@ -137,6 +128,7 @@ const toDoApp = (props) => {
 			<DragDropContext
 				onDragEnd={dragEndHandler}>
 				<div className={classes.Wrap}>
+					
 					<Input
 						changeHandler={changeHandler}
 						refInput={inputRef}
