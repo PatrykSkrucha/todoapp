@@ -35,20 +35,19 @@ const toDoApp = (props) => {
 	const [editableId, setEditableId] = useState(null)
 	const [snackbar, setSnackbar] = useState(false)
 	const [tooltip, setTooltip] = useState(false)
+	const [initial, setInitial] = useState(false)
 
 	const { classes } = props
 	
 	useEffect(()=>{
-		if(toDoList.length>0) {
-
-			localStorage.setItem('tasks', JSON.stringify(toDoList))
-			
-		}
-	},[toDoList])
+		localStorage.getItem('tasks') && setToDoList(JSON.parse(localStorage.getItem('tasks')))
+		setInitial(true)
+	},[])
 
 	useEffect(()=>{
-		localStorage.getItem('tasks') && setToDoList(JSON.parse(localStorage.getItem('tasks')))
-	},[])
+		if(initial) localStorage.setItem('tasks', JSON.stringify(toDoList))
+	},[toDoList])
+
 	
 	const changeHandler = e => {
 		setTask(e.target.value)

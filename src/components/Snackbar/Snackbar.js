@@ -26,10 +26,15 @@ const style = theme => (
 			}
 		},
 		Snackbar: {
+			diaplay: 'flex',
+			flexDirection: 'row',
+			flex: 'nowrap',
 			width: 'auto',
-			[theme.breakpoints.down('sm')]: {
+			
+			[theme.breakpoints.down('xs')]: {
 				width: '80vw',
 				margin: 'auto',
+				maxHeight: 100,
 			},
 		},
 		SnackbarContent: {
@@ -61,6 +66,7 @@ const snackbar = (props) => {
 		<>
 			<Snackbar
 				className={classes.Snackbar}
+				
 				anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
 				autoHideDuration="3000"
 				open={snackbar}
