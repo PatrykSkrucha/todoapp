@@ -26,16 +26,10 @@ const style = theme => (
 			}
 		},
 		Snackbar: {
-			diaplay: 'flex',
-			flexDirection: 'row',
-			flex: 'nowrap',
-			width: 'auto',
-			
-			[theme.breakpoints.down('xs')]: {
-				width: '80vw',
-				margin: 'auto',
-				maxHeight: 100,
-			},
+			maxWidth: 300,
+			[theme.breakpoints.down('sm')]:{
+				margin: 'auto'
+			}
 		},
 		SnackbarContent: {
 			marginBottom: 30,
@@ -80,7 +74,7 @@ const snackbar = (props) => {
 								id='message-id'
 								color='primary'
 								noWrap>
-								Notatka została usunięta
+								Usunięto notatkę
 							</Typography>
 						</span>}
 					action={(
