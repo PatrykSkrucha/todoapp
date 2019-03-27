@@ -5,7 +5,6 @@ import Tasks from '../Tasks/Tasks'
 import Input from '../Input/Input'
 import Modal from '../Modal/Modal'
 import Snackbar from '../Snackbar/Snackbar'
-import useTimeout from "@rooks/use-timeout"
 
 
 const style = {
@@ -39,18 +38,29 @@ const toDoApp = (props) => {
 
 	const { classes } = props
 	
-	
-		
-		const changeHandler = e => {
-			setTask(e.target.value)
+	useEffect(()=>{
+		if(toDoList.length>0) {
+
+			localStorage.setItem('tasks', JSON.stringify(toDoList))
+			
 		}
-		
+	},[toDoList])
+
+	useEffect(()=>{
+		localStorage.getItem('tasks') && setToDoList(JSON.parse(localStorage.getItem('tasks')))
+	},[])
 	
-		
-		const submitHandler = () => {
-			if (task.trim()) {
-				setToDoList(toDoList.concat(task))
-				setTask('')
+	const changeHandler = e => {
+		setTask(e.target.value)
+	}
+	
+
+	
+	const submitHandler = () => {
+		if (task.trim()) {
+			setToDoList(toDoList.concat(task))
+			
+			setTask('')
 			inputRef.current.value = ``
 		}
 	}
@@ -61,6 +71,7 @@ const toDoApp = (props) => {
 
 	const revertList = () => {
 		setToDoList(deletedList)
+		
 		setDeletedList(null)
 		setSnackbar(false)
 		
@@ -90,6 +101,7 @@ const toDoApp = (props) => {
 			result.destination.index
 		)
 		setToDoList(items)
+		
 	}
 
 	const handleClickOpen = id => {
@@ -106,6 +118,7 @@ const toDoApp = (props) => {
 			const newTasks = [...toDoList]
 			newTasks.splice(editableId, 1, task)
 			setToDoList(newTasks)
+			
 			setEdit('')
 			setEditableId(null)
 		}
