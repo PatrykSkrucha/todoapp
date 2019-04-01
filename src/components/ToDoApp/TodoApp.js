@@ -125,6 +125,7 @@ const toDoApp = (props) => {
 
 	const closeSnackbarHandler = () => {
 		setSnackbar(false)
+		setTooltip(false)
 		
 	}
 
