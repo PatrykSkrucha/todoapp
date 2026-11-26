@@ -34,7 +34,7 @@ const modal = (props) => {
 				aria-describedby="alert-dialog-slide-description"
 			>
 				<DialogTitle id="alert-dialog-slide-title">
-					{"Edytuj notatkę"}
+					{"Edit task"}
 				</DialogTitle>
 				<DialogContent>
 					<DialogContentText id="alert-dialog-slide-description">
@@ -51,7 +51,7 @@ const modal = (props) => {
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={()=>handleClose(edit)} color="primary">
-						Akceptuj
+						Save
             </Button>
 				</DialogActions>
 			</Dialog>

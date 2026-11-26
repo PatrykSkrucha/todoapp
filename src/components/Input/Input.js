@@ -41,18 +41,18 @@ const input = (props) => {
 			<Input
 				className={classes.Input}
 				id="standard-name"
-				label="Utwórz notatkę"
+				label="New task"
 				type="text"
 				onChange={props.changeHandler}
 				inputRef={props.inputRef}
 				onKeyDown={props.handleKeyDown}
-				placeholder="Utwórz zadanie" />
+				placeholder="What needs to be done?" />
 			<Button
 				className={classes.Button}
 				size="medium"
 				onClick={props.submitHandler}>
 				
-				Dodaj zadanie
+				Add task
 			</Button>
 
 

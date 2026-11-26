@@ -13,7 +13,7 @@
 - add, edit and delete tasks
 - **reorder tasks by dragging** them (react-beautiful-dnd)
 - edit a task in a modal dialog, confirm with Enter
-- snackbar notification after deleting a task
+- snackbar after deleting a task, with an **Undo** button
 - tasks are saved in **localStorage**, so they survive a page refresh
 
 ## Tech stack
@@ -39,5 +39,5 @@ src/
     ├── Input/       # new task field
     ├── Tasks/       # list and single task
     ├── Modal/       # edit dialog
-    └── Snackbar/    # delete notification
+    └── Snackbar/    # delete notification with undo
 ```

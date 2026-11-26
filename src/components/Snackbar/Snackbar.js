@@ -74,7 +74,7 @@ const snackbar = (props) => {
 								id='message-id'
 								color='primary'
 								noWrap>
-								Usunięto notatkę
+								Task deleted
 							</Typography>
 						</span>}
 					action={(
@@ -82,11 +82,11 @@ const snackbar = (props) => {
 							<Button
 								onClick={revertList}
 								className={classes.Button}>
-								Cofnij
+								Undo
 							</Button>
 							<Tooltip
 								TransitionComponent={Zoom}
-								title="Zamknij"
+								title="Close"
 								placement="bottom"
 								open={tooltip}>
 								<IconButton
